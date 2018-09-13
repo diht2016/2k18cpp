@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "sortable-text.cpp"
+#include "sortable-text.h"
 
 bool beginningComparator(char* a, char* b) {
   int pos = 0;
@@ -39,7 +39,8 @@ bool endComparator(char* a, char* b) {
       continue;
     }
     
-    // a case when both characters are second parts of two-byte UTF-8 characters
+    // a case when both characters are
+    // second parts of two-byte UTF-8 characters
     if ((a[apos] & 0x80) && !(a[apos] & 0x40) &&
         (b[bpos] & 0x80) && !(b[bpos] & 0x40)) {
       if (apos > 0 && bpos > 0) {
