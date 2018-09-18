@@ -30,6 +30,7 @@ int solveSquare(double a, double b, double c, double* x1, double* x2) {
   assert(x2 != NULL);
   assert(x1 != x2);
   
+  /* double numbers should be compared with epsilon plz */
   if (a == 0) {
     return solveLinear(b, c, x1);
   }
