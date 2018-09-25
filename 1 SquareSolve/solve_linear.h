@@ -25,8 +25,8 @@ int solveLinear(double k, double b, double* x) {
   
   assert(x != NULL);
   
-  if (k == 0) {
-    return b == 0 ? EQ_INF_ROOTS : 0;
+  if (isDoubleZero(k)) {
+    return isDoubleZero(b) ? EQ_INF_ROOTS : 0;
   }
   
   *x = -b / k;

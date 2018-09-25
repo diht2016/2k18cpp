@@ -6,20 +6,20 @@
 
 class SortableText {
  public:
-  SortableText(char* file_name) {
+  SortableText(const char* file_name) {
     buildFromFile(file_name);
   }
   
-  void sort(bool(*comparator)(char*, char*)) {
+  void sort(bool(*comparator)(const char*, const char*)) {
     std::sort(lines.begin(), lines.end(), comparator);
   }
   
-  void save(char* file_name) {
+  void save(const char* file_name) {
     // "wb" instead of "w" to process writing '\n' correctly
     FILE *file = fopen(file_name, "wb");
     assert(file != NULL);
     
-    char lf = '\n';
+    const char lf = '\n';
     for (size_t i = 0; i < lines.size(); i++) {
       fwrite(lines[i], 1, strlen(lines[i]), file);
       fwrite(&lf, 1, 1, file);
@@ -29,7 +29,7 @@ class SortableText {
   }
   
  private:
-  void buildFromFile(char* file_name) {
+  void buildFromFile(const char* file_name) {
     FILE *file = fopen(file_name, "r");
     assert(file != NULL);
     

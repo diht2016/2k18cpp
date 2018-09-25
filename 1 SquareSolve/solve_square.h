@@ -21,7 +21,7 @@
 //! returns EQ_INF_ROOTS,
 //! which is defined in "solve_linear.cpp"
 //‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐‐
-int solveSquare(double a, double b, double c, double* x1, double* x2) {
+int solveSquare(const double a, const double b, const double c, const double* x1, const double* x2) {
   assert(std::isfinite(a));
   assert(std::isfinite(b));
   assert(std::isfinite(c));
@@ -30,19 +30,31 @@ int solveSquare(double a, double b, double c, double* x1, double* x2) {
   assert(x2 != NULL);
   assert(x1 != x2);
   
-  if (a == 0) {
+  if (isDoubleZero(a)) {
     return solveLinear(b, c, x1);
   }
   
-  double d = b * b - 4 * a * c;
+  if (isDoubleZero(c)) {
+    // a is not zero (was checked before),
+    // so there is always one root
+    double x = 0;
+    solveLinear(a, b, &x);
+    
+    *x1 = x < 0 ? 0 : x;
+    *x2 = x < 0 ? x : 0;
+    return 2;
+  }
+  
+  const double d = b * b - 4 * a * c;
   if (isDoubleZero(d)) {
     *x1 = *x2 = -b / (2 * a);
     return 1;
   }
   
   if (d > 0) {
-    double sqrt_d = sqrt(d);
-    double sign = a > 0 ? 1 : -1;
+    const double sqrt_d = sqrt(d);
+    const double sign = a > 0 ? 1 : -1;
+    
     *x1 = (-b + sign * sqrt_d) / (2 * a);
     *x2 = (-b - sign * sqrt_d) / (2 * a);
     return 2;

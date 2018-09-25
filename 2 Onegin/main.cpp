@@ -2,7 +2,7 @@
 
 #include "sortable-text.h"
 
-bool beginningComparator(char* a, char* b) {
+bool beginningComparator(const char* a, const char* b) {
   int pos = 0;
   while (true) {
     if (a[pos] == b[pos]) {
@@ -18,7 +18,7 @@ bool beginningComparator(char* a, char* b) {
   }
 }
 
-bool endComparator(char* a, char* b) {
+bool endComparator(const char* a, const char* b) {
   int apos = strlen(a) - 1;
   int bpos = strlen(b) - 1;
   
