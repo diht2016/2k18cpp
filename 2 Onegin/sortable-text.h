@@ -40,7 +40,8 @@ class SortableText {
     
     size_t buffer_size = length + 1;
     buffer = (char*) calloc(buffer_size, 1);
-    fread(buffer, 1, length, file);
+    size_t length_read = fread(buffer, 1, length, file);
+    assert(length_read == length);
     
     lines.push_back(buffer);
     for (size_t i = 0; i < length; i++) {

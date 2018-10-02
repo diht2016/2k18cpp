@@ -15,7 +15,6 @@ int main() {
   int pos = 0;
   while (std::isfinite(test_data[pos])) {
     total++;
-    /* Okay, you got completely away with input processing, for the first time it is fine */
     double a = test_data[pos];
     double b = test_data[pos + 1];
     double c = test_data[pos + 2];

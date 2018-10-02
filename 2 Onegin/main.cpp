@@ -18,17 +18,21 @@ bool beginningComparator(const char* a, const char* b) {
   }
 }
 
+bool isAlpha(const char a) {
+  return (unsigned char) a > '\x40';
+}
+
 bool endComparator(const char* a, const char* b) {
   int apos = strlen(a) - 1;
   int bpos = strlen(b) - 1;
   
   while (apos >= 0 && bpos >= 0) {
     // skip spaces and punctuation
-    if ((unsigned char) a[apos] < '\x40') {
+    if (!isAlpha(a[apos])) {
       apos--;
       continue;
     }
-    if ((unsigned char) b[bpos] < '\x40') {
+    if (!isAlpha(b[bpos])) {
       bpos--;
       continue;
     }
